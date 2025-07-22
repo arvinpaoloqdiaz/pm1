@@ -14,7 +14,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono&family=Poppins:wght@600&display=swap" rel="stylesheet">
 
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body class="bg-brand-light">
 <div class="container-fluid">

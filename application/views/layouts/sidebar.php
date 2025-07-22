@@ -1,4 +1,4 @@
-<div class="col-md-2 col-lg-2 sidebar">
+<div class="col-md-2 col-lg-2 sidebar position-fixed">
   
   <nav class="nav flex-column justify-content-between h-100">
 	
@@ -16,3 +16,4 @@
 	</div>
   </nav>
 </div>
+<div class="col-md-2"></div>

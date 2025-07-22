@@ -20,6 +20,9 @@
 	box-sizing: border-box;
 	font-family:"Inter",sans-serif;
 }
+textarea{
+	resize:none !important;
+}
 .inter {
   font-family: 'Inter', sans-serif !important;
 }
@@ -45,6 +48,7 @@
 .btn-brand:hover {
   background-color: var(--bs-brand-hover);
   border-color: var(--bs-brand-hover);
+  color:#fff !important;
 }
 .btn-brand:disabled,
 .btn-brand.disabled {
