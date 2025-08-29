@@ -5,7 +5,7 @@
 <div class="col-md-9 col-lg-10 main-content p-5 d-flex justify-content-center">
 	
 		<div style="width: 50%;">
-			<p class="display-6 poppins m-0 p-0 mb-3">Create New Project</p>
+			<p class="display-6 poppins m-0 p-0 mb-3 text-brand">Create New Project</p>
 		
 		
 		<?php if (validation_errors()): ?>
@@ -15,18 +15,19 @@
 		<?php endif; ?>
 
 		<?= form_open() ?>
-			<section class="card shadow mb-3 px-5">
+			<section class="card shadow mb-3 px-5 py-4">
 				<div class="card-body">
-				<h3>Project Group</h3>
+				<h3 class="text-muted jetbrains-mono fw-bold">Project Group</h3>
+				<hr>
 				<div class="form-floating mb-3">
 					<select name="group_id" id="group_id" class="form-select">
-						<option value="" selected>--Select Group--</option>
+						<option value="" selected>Select Group</option>
 						<?php foreach ($groups as $group): ?>
 							<option value="<?= $group->id ?>" <?= set_select('group_id', $group->id) ?>>
 								<?= $group->name ?>
 							</option>
 						<?php endforeach; ?>
-						<option value="other">Add New Project</option>
+						<option value="other">Add New Project Group</option>
 					</select>
 					<label for="group_id">Project Group Name</label>
 					
@@ -35,9 +36,10 @@
 				<div id="new-project-group-container" class="mb-3" style="display: none;"></div>
 				</div>
 			</section>
-			<section class="card shadow mb-3 px-5">
+			<section class="card shadow mb-3 px-5 py-4">
 				<div class="card-body">
-					<h3 class="text-muted jetbrains-mono">Project Details</h3>
+					<h3 class="text-muted jetbrains-mono fw-bold">Project Details</h3>
+					<hr>
 				<div class="form-floating mb-3">
 					<input type="text" name="name" id="name" value="<?= set_value('name') ?>" class="form-control" placeholder="Project Name" required>
 					<label for="name">Project Name</label>
@@ -54,9 +56,16 @@
 				</div>
 				
 				<div class="form-floating mb-3">
-					<input type="text" name="deploy_type" id="deploy_type" value="<?= set_value('deploy_type') ?>" class="form-control" placeholder="Local">
-					<label for="deploy_type">Deployment Type</label>
+				<select name="deploy_type" id="deploy_type" class="form-select">
+					<option value="" selected hidden>Select Deployment Type</option>
+					<option value="Local" <?= set_value('deploy_type') === 'Local' ? 'selected' : '' ?>>Local</option>
+					<option value="Development" <?= set_value('deploy_type') === 'Development' ? 'selected' : '' ?>>Development</option>
+					<option value="Staging" <?= set_value('deploy_type') === 'Staging' ? 'selected' : '' ?>>Staging</option>
+					<option value="Production" <?= set_value('deploy_type') === 'Production' ? 'selected' : '' ?>>Production</option>
+				</select>
+				<label for="deploy_type">Deployment Type</label>
 				</div>
+
 
 				<div class="form-floating mb-3">
 					<input type="url" name="deploy_link" id="deploy_link" value="<?= set_value('deploy_link') ?>" class="form-control" placeholder="https://example.com">
@@ -70,8 +79,7 @@
 				</div>
 			</section>
 
-			<button type="submit" class="btn btn-brand">Save Project</button>
-			<a href="<?= site_url('project') ?>" class="btn btn-secondary">Cancel</a>
+			<button type="submit" class="btn btn-brand float-end">Create Project</button>
 			<?= form_close() ?>
 
 		</div>

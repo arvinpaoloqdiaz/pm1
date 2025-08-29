@@ -57,5 +57,6 @@ $route['default_controller'] = 'auth/login';
 $route['register'] = 'auth/register';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
+$route['project/all']='project/index';
 $route['dashboard'] = 'dashboard';
 

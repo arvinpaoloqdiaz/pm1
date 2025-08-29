@@ -6,9 +6,13 @@ class Project_model extends CI_Model
     protected $table = 'projects';
 
     public function get_all()
-    {
-        return $this->db->get($this->table)->result();
-    }
+{
+    $this->db->select('projects.*, project_groups.name as group_name');
+    $this->db->from($this->table . ' as projects');
+    $this->db->join('project_groups', 'projects.group_id = project_groups.id', 'left'); // left join so it still works if group_id is NULL
+
+    return $this->db->get()->result();
+}
 
     public function get($id)
     {
@@ -35,4 +39,9 @@ class Project_model extends CI_Model
     {
         return $this->db->delete($this->table, ['id' => $id]);
     }
+	    public function get_all_count()
+{
+    return $this->db->count_all($this->table);
+}
+
 }

@@ -18,17 +18,29 @@ class Project extends CI_Controller {
         $this->load->view('projects/index', $data);
     }
 
-    public function view($id)
-    {
-        $project = $this->Project_model->get($id);
-
-        if (!$project) {
-            show_404();
-        }
-
-        $data['project'] = $project;
-        $this->load->view('projects/view', $data);
+   public function view($id = null)
+{
+    // Ensure an ID is provided and it's numeric
+    if ($id === null || !is_numeric($id)) {
+        show_404();
     }
+
+    // Get the project from the model
+    $project = $this->Project_model->get((int) $id);
+
+    // If no project found, show 404
+    if (empty($project)) {
+        show_404();
+    }
+
+    // Pass project data to the view
+    $data = [
+        'project' => $project
+    ];
+
+    $this->load->view('projects/view', $data);
+}
+
 
     public function add()
 {
