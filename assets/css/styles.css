@@ -144,3 +144,6 @@ textarea{
   border-left-color: var(--bs-brand);
   border-right-color: var(--bs-brand);
 }
+.text-justify{
+	text-align: justify !important;
+}

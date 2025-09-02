@@ -15,9 +15,15 @@ class Project_model extends CI_Model
 }
 
     public function get($id)
-    {
-        return $this->db->get_where($this->table, ['id' => $id])->row();
-    }
+{
+    $this->db->select('projects.*, project_groups.name as group_name');
+    $this->db->from($this->table . ' as projects');
+    $this->db->join('project_groups', 'projects.group_id = project_groups.id', 'left');
+    $this->db->where('projects.id', $id);
+
+    return $this->db->get()->row();
+}
+
 
     public function get_by_group($group_id)
     {

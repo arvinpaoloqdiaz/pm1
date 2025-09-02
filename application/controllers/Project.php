@@ -10,6 +10,11 @@ class Project extends CI_Controller {
         $this->load->model('Project_group_model'); // optional, if you want group names
         $this->load->helper(['form', 'url']);
         $this->load->library('form_validation');
+
+		// Load env variables
+        $env = require APPPATH.'config/env.php';
+
+        
     }
 
     public function index()
@@ -18,7 +23,7 @@ class Project extends CI_Controller {
         $this->load->view('projects/index', $data);
     }
 
-   public function view($id = null)
+ public function view($id = null)
 {
     // Ensure an ID is provided and it's numeric
     if ($id === null || !is_numeric($id)) {
@@ -33,13 +38,30 @@ class Project extends CI_Controller {
         show_404();
     }
 
-    // Pass project data to the view
+    // Load env variables
+    $env = require APPPATH.'config/env.php';
+    $cloudName = $env['CLOUDINARY_CLOUD_NAME'];
+
+    // Generate Cloudinary screenshot URL
+    // Replace 'project_url' with the field that stores the project’s live URL
+    $siteUrl = $project->deployment_url ?? ''; 
+$encodedUrl = urlencode($siteUrl);
+
+// If deployment_url is empty, snapshotUrl is blank
+$snapshotUrl = !empty($siteUrl) 
+    ? "https://api.apiflash.com/v1/urltoimage?access_key=a3533aee243e4d8294835842ff5bbb89&url={$encodedUrl}&format=webp&wait_until=dom_loaded" 
+    : '';
+
+
+    // Pass project and snapshot URL to the view
     $data = [
-        'project' => $project
+        'project' => $project,
+        'snapshotUrl' => $snapshotUrl
     ];
 
     $this->load->view('projects/view', $data);
 }
+
 
 
     public function add()
