@@ -58,5 +58,6 @@ $route['register'] = 'auth/register';
 $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 $route['project/all']='project/index';
+$route['group/all']='group/index';
 $route['dashboard'] = 'dashboard';
 

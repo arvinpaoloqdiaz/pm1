@@ -65,6 +65,9 @@
   50%  { transform: scale(1.3); opacity: 0.6; }
   100% { transform: scale(1); opacity: 1; }
 }
+#featureContainer{
+	border: 4px dashed rgba(var(--bs-brand-rgb),0.5);
+}
 </style>
 <?php
 // DB value, assume UTC
@@ -106,39 +109,48 @@ $statusText = ucfirst(str_replace('_', ' ', $project->status));
 	</div>
 	</div>
 	<hr>
-	<div class="d-flex justify-content-evenly align-items-between">
-	<div class="d-flex flex-column justify-content-start gap-4 w-100">
-	<p class=" fw-light text-secondary text-justify" style="max-width:600px;"><?= $project->description; ?></p>
-	<table class="table table-borderless table-hover shadow-sm rounded-3 mt-4" style="max-width:600px;">
+	<div class="d-flex justify-content-evenly gap-4 align-items-between">
+	<div class="d-flex flex-column justify-content-between gap-4 w-100 py-5">
+	<p class=" fw-light text-secondary text-justify" ><?= $project->description; ?></p>
+	<table class="table table-borderless table-hover shadow-sm rounded-3 mt-4">
     <tbody>
-        <tr>
-            <th class="bg-light text-secondary w-25 text-end">Tech / Stack</th>
-            <td>
-                <span class="badge bg-secondary text-warning fs-6 px-3 py-2 shadow-sm fw-light">
+        <tr class="align-middle">
+            <th class="bg-light w-25 text-center p-3">Tech / Stack</th>
+            <td class="p-3">
+                <span class="badge bg-black text-warning fs-6 px-3 py-2 shadow-sm fw-light">
                     <?= $project->nature; ?>
                 </span>
             </td>
         </tr>
-        <tr>
-            <th class="bg-light text-secondary text-end">Repo</th>
-            <td>
+        <tr class="align-middle">
+            <th class="bg-light text-center p-3">Repo</th>
+            <td class="p-3">
                 <a href="<?= $project->repo_url; ?>" target="_blank"
                    class="badge bg-brand text-white fs-6 px-3 py-2 shadow-sm text-decoration-none fw-light">
-                   Repository Link
+                   <?= $project->repo_url; ?>
                 </a>
             </td>
         </tr>
-        <tr>
-            <th class="bg-light text-secondary text-end">Deployment</th>
-            <td>
-                <a href="<?= $project->deployment_url; ?>" target="_blank"
-                   class="badge bg-success text-white fs-6 px-3 py-2 shadow-sm text-decoration-none fw-light">
-                   <?= $project->deployment_type;?> Link
-                </a>
+        <tr class="align-middle">
+            <th class="bg-light text-center p-3">Deployment</th>
+            <td class="p-3">
+				<a href="<?= $project->deployment_url; ?>" target="_blank"
+				class="badge bg-success text-white fs-6 px-3 py-2 shadow-sm text-decoration-none fw-light">
+				<?= $project->deployment_url; ?>
+			</a>
+			<span class="fst-italic small text-secondary"><?= $project->deployment_type;?> </span>
             </td>
         </tr>
     </tbody>
 </table>
+
+<div class="btn-group w-100" role="group">
+  <button type="button" class="btn btn-outline-brand w-100"><i class="bi bi-collection"></i> View Group</button>
+  <button type="button" class="btn btn-outline-secondary w-100"><i class="bi bi-pencil-square"></i> Edit</button>
+  <button type="button" class="btn btn-outline-danger w-100"><i class="bi bi-trash"></i> Delete</button>
+</div>
+
+
 </div>
 <?php if (!empty($snapshotUrl)): ?>
     <img src="<?= $snapshotUrl; ?>" 
@@ -146,7 +158,7 @@ $statusText = ucfirst(str_replace('_', ' ', $project->status));
          style="width:100%; max-width:800px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.2);" 
          class="img-fluid">
 <?php else: ?>
-    <div style="width:100%; max-width:800px; height:500px; 
+    <div style="width:100%; max-width:800px; height:400px; 
                 display:flex; align-items:center; justify-content:center; 
                 border: 2px dashed #ccc; border-radius:8px; color:#999; font-style:italic;">
         No preview available
@@ -154,6 +166,9 @@ $statusText = ucfirst(str_replace('_', ' ', $project->status));
 <?php endif; ?>
 
 </div>
+<section class="w-100 bg-white my-4 rounded-4 shadow-sm p-5" id="featureContainer">
+	<h1>test</h1>
+</section>
 </div>
 
 <?php $this->load->view('layouts/footer'); ?>
